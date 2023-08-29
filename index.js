@@ -7,7 +7,7 @@ let start_value = document.querySelector("h1#start_value");
 let winning_pattern;
 let winnerIndicator = getComputedStyle(document.body).getPropertyValue('--winning-blocks');
 let array = Array(9).fill(null);
-
+let flag =0;
 var start_btn = document.getElementById("start");
 
 
@@ -28,21 +28,29 @@ function started() {
 
 
 function boxClicked(e) {
+   let result = playerwon(); 
+    if(result){
+        start_value.innerHTML = "Game Ended!!";
+
+    }
 
     let index = e.target.id;
 
 
-    if (array[index] === null) {
+    if (array[index] === null && !result) {
         array[index] = e.target.innerHTML = current_player;
     }
 
+ 
 
-    if (playerwon() === true) {
-        result.innerHTML = current_player + " has won";
+    if (playerwon() && flag===0) {
+        flag=1;
+        start_value.innerHTML= current_player + " has won";
 
         winning_pattern.map(pattern => boxes[pattern].style.backgroundColor = winnerIndicator);
 
     }
+    
 
     current_player = current_player === player_1 ? player_2 : player_1;
 
@@ -64,6 +72,8 @@ function playerwon() {
             return true;
         }
     }
+
+   
     return false;
 }
 
@@ -95,6 +105,7 @@ function restarted() {
             x.style.backgroundColor = '';
         }
     );
-   
+    flag =0;
+    start_value.innerHTML = ""
 
 }
