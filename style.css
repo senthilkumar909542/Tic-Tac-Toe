@@ -17,7 +17,7 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: center;
+
     height: 100vh;
     text-align: center;
     background-color: #37505C;
