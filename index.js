@@ -1,85 +1,4 @@
-let boxes = document.querySelectorAll("div.box");
-let player_1 = 'X';
-let player_2 = 'O';
-let current_player = 'X';
-let result = document.querySelector('h1');
-let start_value = document.querySelector("h1#start_value");
-let winning_pattern;
-let winnerIndicator = getComputedStyle(document.body).getPropertyValue('--winning-blocks');
-let array = Array(9).fill(null);
-let flag = 0;
-var start_btn = document.getElementById("start");
-
-
-start_btn.addEventListener("click", start);
-
-function start() {
-    start_value.innerHTML = "";
-    started();
-
-}
-
-
-function started() {
-
-    boxes.forEach(box => box.addEventListener('click', boxClicked));
-
-}
-
-
-function boxClicked(e) {
-     if (array[e.target.id] === null) {
-          let result = playerwon();
-    if (result) {
-        start_value.innerHTML = "Game Ended!!";
-
-    }
-
-    let index = e.target.id;
-
-
-    if (array[index] === null && !result) {
-        array[index] = e.target.innerHTML = current_player;
-    }
-
-    if ((array.find(x => x == null) === undefined)) {
-        start_value.innerHTML = "Draw!!";
-    }else if(playerwon() && flag === 0) {
-        flag = 1;
-        start_value.innerHTML = current_player + " has won";
-        winning_pattern.map(pattern => boxes[pattern].style.backgroundColor = winnerIndicator);
-    }
-
-
-    
-    current_player = current_player === player_1 ? player_2 : player_1;
-
-     }
-}
-
-function playerwon() {
-
-
-    for (let i = 0; i < winningCombos.length; i++) {
-        const arr = winningCombos[i];
-
-        let firstindex = (array[arr[0]] === array[arr[1]]) && (array[arr[0]] !== null);
-        let middleindex = (array[arr[1]] === array[arr[2]]) && (array[arr[1]] !== null);
-        let lastindex = (array[arr[2]] === array[arr[0]]) && (array[arr[2]] !== null);
-
-
-        if (firstindex && lastindex && middleindex) {
-            winning_pattern = [arr[0], arr[1], arr[2]];
-            return true;
-        }
-    }
-
-
-    return false;
-}
-
-
-const winningCombos = [
+const winning_pattern = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -88,26 +7,87 @@ const winningCombos = [
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6]
-]
+];
 
+let start_btn = document.getElementById("start");
+let restart_btn = document.getElementById("restart");
+let box_click = Array.from(document.getElementsByClassName("box"));
+let boxes = Array(9).fill(null);
+let header = document.getElementById("header");
+let current_player = "X";
+start_btn.addEventListener('click', start);
+let result = false;
+let result_pattern;
+let count = [];
+let play = true;
 
+function start() {
+    box_click.forEach(x => x.addEventListener('click', boxClicked));
+    if(play) header.innerHTML = "Let's Play!!";
 
-document.getElementById('restart').addEventListener('click', restarted);
+    
+    play=false;
+};
 
+restart_btn.addEventListener('click', restart);
 
-function restarted() {
-    console.log("hi");
-    result.innerHTML = "Tic Tac Toc";
-    array.fill(null);
+function restart() {
 
-    boxes.forEach(
-        x => {
-            x.innerHTML = '';
-            x.style.backgroundColor = '';
-        }
+    header.innerHTML = "press start";
+
+    boxes.fill(null);
+
+    box_click.forEach(x => {
+        x.innerHTML = '';
+        x.style.background = '';
+    }
     );
-    flag = 0;
-    current_player ="X";
-    start_value.innerHTML = "";
+    result = false;
+    current_player = "X";
+    result_pattern = '';
+    count = [];
+    play=true;
 
 }
+function boxClicked(x) {
+    let index = x.target.id;
+
+    if (boxes[index] === null && result === false && !play) {
+
+        boxes[index] = current_player;
+        result = playerwon();
+      
+        document.getElementById(index).innerHTML = current_player;
+        if (result) {
+
+            result_pattern.forEach(x => {
+                box_click[x].style.background = "red";
+
+            });
+            header.innerHTML = current_player + " " + "has won!!!";
+        } else if (count.length === 8) {
+            header.innerHTML = "Draw!!";
+
+        }
+        count.push(' ');
+        current_player = current_player === "X" ? "O" : "X";
+
+    }
+};
+
+function playerwon() {
+
+    for (let i = 0; i < winning_pattern.length; i++) {
+        let x = winning_pattern[i];
+
+        if ((boxes[x[0]] !== null) && (boxes[x[0]] === boxes[x[1]]) 
+         && (boxes[x[1]] !== null) && (boxes[x[1]] === boxes[x[2]]) &&
+            (boxes[x[2]] !== null) && (boxes[x[2]] === boxes[x[1]])
+        ) {
+            result_pattern = x;
+            return true;
+        }
+    }
+
+    return false;
+};
