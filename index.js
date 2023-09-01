@@ -28,7 +28,8 @@ function started() {
 
 
 function boxClicked(e) {
-    let result = playerwon();
+     if (array[e.target.id] === null) {
+          let result = playerwon();
     if (result) {
         start_value.innerHTML = "Game Ended!!";
 
@@ -53,6 +54,7 @@ function boxClicked(e) {
     
     current_player = current_player === player_1 ? player_2 : player_1;
 
+     }
 }
 
 function playerwon() {
