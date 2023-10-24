@@ -1,60 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Croissant+One&family=Dosis&family=Ubuntu&display=swap");
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    color: var(--orange);
-    font-family: 'Finger Paint', cursive;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--orange);
+  font-family: "Croissant One", serif;
+  font-family: "Dosis", sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
-
-/* Declaring variable*/
 :root {
-    --orange: #F2C14E;
-    --winning-blocks: #2d414b;
+  --orange: #f2c14e;
+  --winning-blocks: #37505c;
 }
 
-/*   background-color: #37505C; */
-
-body {
-    display: flex;
-    justify-content: center;
-
-    height: 100vh;
-    text-align: center;
-    background-color: #37505C;
+.container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--winning-blocks);
 }
 
-h1 {
-    font: 24px;
-}
-.start_value{
-    font: 1px;
-}
-
-#gameboard {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    margin-top: 10px;
-}
-.box{
-    height: 100px;
-    width: 100px;
-    border: 1px solid #F2C14E;
-    font-size: 60px;
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 400px;
 }
 
-
-button {
-    padding: 10px 20px;
-    border-radius: 10px;
-    background-color: var(--orange);
-    color: #333;
-    border-color: var(--orange);
-    font-size: 18px;
-    transition: transform 200ms;
-    font-weight: 600;
+.game > h1 {
+  font: 24px;
 }
+
+.game > .btn > button , .details>.btn>button{
+  padding: 10px 20px;
+  border-radius: 10px;
+  border-color: var(--orange);
+  background-color: var(--orange);
+  color: #333;
+  font-size: 18px;
+  transition: transform 200ms;
+  font-weight: 600;
+  margin: 5px;
+}
+
+.game > .gameboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  margin-top: 20px;
+  width: 300px;
+}
+
+.game > .gameboard > .box {
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  border: 1px solid #f2c14e;
+  font-size: 60px;
+  font-family: "Finger Paint", cursive;
+}
+
 button:hover {
-    cursor: pointer;
-    transform: translateY(-2px);
+  cursor: pointer;
+  transform: translateY(-2px);
 }
+
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;  
+  width: 300px;
+}
+
+.details > .name {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 20px;
+  font-size: 20px;
+}
+
+.details > .name > label {
+  margin: 10px;
+}
+
+.details > .name > input {
+  height: 40px;
+  width: 200px;
+  border-radius: 20px;
+  outline: none;
+  border: 2px solid black;
+  text-align: center;
+  font-size: 18px;
+  background-color: var(--winning-blocks);
+}
+
+.details > .btn > button {
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.result{
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 20px;
+  width: 400px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.result>div>h4{
+  margin-bottom: 5px;
+}
+
+
