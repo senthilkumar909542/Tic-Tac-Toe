@@ -12,14 +12,15 @@
 :root {
   --orange: #f2c14e;
   --winning-blocks: #37505c;
+  background-color: var(--winning-blocks);
 }
 
 .container {
   display: flex;
   justify-content: center;
   height: 100vh;
-  width: 100%;
-  background-color: var(--winning-blocks);
+  width: 100vw;
+ 
 }
 
 .game {
