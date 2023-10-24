@@ -20,7 +20,6 @@
   justify-content: center;
   height: 100vh;
   width: 100vw;
- 
 }
 
 .game {
@@ -35,7 +34,8 @@
   font: 24px;
 }
 
-.game > .btn > button , .details>.btn>button{
+.game > .btn > button,
+.details > .btn > button {
   padding: 10px 20px;
   border-radius: 10px;
   border-color: var(--orange);
@@ -73,9 +73,9 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
-  height: 60vh;  
+  height: 60vh;
   width: 300px;
+  margin-top: 100px;
 }
 
 .details > .name {
@@ -107,7 +107,7 @@ button:hover {
   border-radius: 10px;
 }
 
-.result{
+.result {
   display: flex;
   justify-content: space-evenly;
   font-size: 20px;
@@ -116,8 +116,49 @@ button:hover {
   text-align: center;
 }
 
-.result>div>h4{
+.result > div > h4 {
   margin-bottom: 5px;
 }
 
+@media only screen and (max-width: 600px) {
+  .game {
+    width: 300px;
+  }
 
+  .game > h1 {
+    font: 18px;
+  }
+
+  .game > .gameboard {
+    width: 240px;
+  }
+
+  .game > .gameboard > .box {
+    height: 80px;
+    width: 80px;
+    font-size: 50px;
+  }
+
+  .details {
+    width: 200px;
+  }
+
+  .details > .name > label {
+    margin: 10px;
+  }
+
+  .details > .name > input {
+    height: 40px;
+    width: 180px;
+  }
+
+  .details > .btn > button {
+    font-size: 14px;
+    padding: 4px 10px;
+  }
+
+  .result {
+    font-size: 18px;
+    width: 300px;
+  }
+}
